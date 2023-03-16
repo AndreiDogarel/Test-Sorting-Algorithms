@@ -5,14 +5,15 @@ using namespace std;
 
 void countSortB2(int a[], int n, int power, int exp){
     int BASE = (1 << power);
-    map<int, int> mp;
+    int* res = new int[100000000];
+    int mp[BASE + 5];
+    memset(mp, 0, sizeof(mp));
     for(int i = 1; i <= n; ++i){
         mp[(a[i] >> exp) & (BASE - 1)]++;
     }
     for(int i = 1; i < BASE; ++i){
         mp[i] += mp[i - 1];
     }
-    int* res = new int[100000000];
     for(int i = n; i >= 1; --i){
         res[mp[(a[i] >> exp) & (BASE - 1)]] = a[i];
         mp[(a[i] >> exp) & (BASE - 1)]--;
