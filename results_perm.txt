@@ -1,67 +1,74 @@
 TESTE CU PERMUTARI DE N ELEMENTE
 
-N = 100
+N = 10
 
-Merge Sort: 0
-Quick Sort: 0
-Radix Sort Base = 2 ^ 16: 187.071
+Radix Sort Base = 2 ^ 16: 0
 Radix Sort Base = 2 ^ 10: 0
 Radix Sort Base = 2 ^ 8: 0
+Radix Sort Base = 2 ^ 4: 0
 Radix Sort Base = 10: 0
-Shell Sort: 0
-Count Sort: 0
-C++ Native Sort: 0
+
+
+N = 100
+
+Radix Sort Base = 2 ^ 16: 0
+Radix Sort Base = 2 ^ 10: 0
+Radix Sort Base = 2 ^ 8: 0
+Radix Sort Base = 2 ^ 4: 0
+Radix Sort Base = 10: 0
 
 
 N = 1000
 
-Merge Sort: 15.93
-Quick Sort: 0
-Radix Sort Base = 2 ^ 16: 145.242
+Radix Sort Base = 2 ^ 16: 0
 Radix Sort Base = 2 ^ 10: 0
 Radix Sort Base = 2 ^ 8: 0
+Radix Sort Base = 2 ^ 4: 0
 Radix Sort Base = 10: 0
-Shell Sort: 0
-Count Sort: 0
-C++ Native Sort: 0
 
 
 N = 10000
 
-Merge Sort: 126.253
-Quick Sort: 0
-Radix Sort Base = 2 ^ 16: 161.046
-Radix Sort Base = 2 ^ 10: 15.505
-Radix Sort Base = 2 ^ 8: 16.015
-Radix Sort Base = 10: 15.985
-Shell Sort: 0
-Count Sort: 15.999
-C++ Native Sort: 0
+Radix Sort Base = 2 ^ 16: 0
+Radix Sort Base = 2 ^ 10: 0
+Radix Sort Base = 2 ^ 8: 0
+Radix Sort Base = 2 ^ 4: 0.000971
+Radix Sort Base = 10: 0.001
 
 
 N = 100000
 
-Merge Sort: 1314.74
-Quick Sort: 16.35
-Radix Sort Base = 2 ^ 16: 297.569
-Radix Sort Base = 2 ^ 10: 225.208
-Radix Sort Base = 2 ^ 8: 184.015
-Radix Sort Base = 10: 177.646
-Shell Sort: 23.523
-Count Sort: 193.636
-C++ Native Sort: 15.513
+Radix Sort Base = 2 ^ 16: 0.003001
+Radix Sort Base = 2 ^ 10: 0.00497
+Radix Sort Base = 2 ^ 8: 0.004
+Radix Sort Base = 2 ^ 4: 0.009
+Radix Sort Base = 10: 0.013998
 
 
 N = 1000000
 
-Merge Sort: 13328.5
-Quick Sort: 217.893
-Radix Sort Base = 2 ^ 16: 1903.55
-Radix Sort Base = 2 ^ 10: 2208.13
-Radix Sort Base = 2 ^ 8: 1964.83
-Radix Sort Base = 10: 2152.28
-Shell Sort: 314.595
-Count Sort: Nu poate sorta
-C++ Native Sort: 153.075
+Radix Sort Base = 2 ^ 16: 0.029001
+Radix Sort Base = 2 ^ 10: 0.051999
+Radix Sort Base = 2 ^ 8: 0.048965
+Radix Sort Base = 2 ^ 4: 0.086997
+Radix Sort Base = 10: 0.152038
+
+
+N = 10000000
+
+Radix Sort Base = 2 ^ 16: 0.387999
+Radix Sort Base = 2 ^ 10: 0.491
+Radix Sort Base = 2 ^ 8: 0.507002
+Radix Sort Base = 2 ^ 4: 0.850033
+Radix Sort Base = 10: 1.64762
+
+
+N = 100000000
+
+Radix Sort Base = 2 ^ 16: 4.39903
+Radix Sort Base = 2 ^ 10: 5.49302
+Radix Sort Base = 2 ^ 8: 5.17101
+Radix Sort Base = 2 ^ 4: 8.71805
+Radix Sort Base = 10: 18.898
 
 

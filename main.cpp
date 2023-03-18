@@ -12,7 +12,7 @@ using namespace std::chrono_literals;
 using std::chrono::high_resolution_clock;
 using std::chrono::duration_cast;
 using std::chrono::duration;
-using std::chrono::milliseconds;
+using std::chrono::seconds;
 
 
 int* principal = new int[100000000];
@@ -39,7 +39,7 @@ void shuffle_perm_n(int n){
 void shuffle_vect(int n){
     random_device rd;
     mt19937 rng_nr(rd());
-    uniform_int_distribution<> rand_nr(1000, 1000000); 
+    uniform_int_distribution<> rand_nr(100000000, INT_MAX);
     for(int i = 1; i <= n; ++i){
         vector_to_sort[i] = rand_nr(rng_nr);
     }
@@ -47,6 +47,13 @@ void shuffle_vect(int n){
     shuffle(vector_to_sort + 1, vector_to_sort + n + 1, rng);
     for(int i = 1; i <= n; ++i){
         principal[i] = vector_to_sort[i];
+    }
+}
+
+void not_shuffled(int n){
+    for(int i = 1; i <= n; ++i){
+        vector_to_sort[i] = i;
+        principal[i] = i;
     }
 }
 
@@ -69,7 +76,7 @@ result time_merge_sort(int n, function<void(int)> type_of_shuffle){
         auto start = high_resolution_clock::now();
         mergeSort(vector_to_sort, 1, n);
         auto end = high_resolution_clock::now();
-        duration<double, std::milli> res = end - start; 
+        duration<double> res = end - start; 
         if(!test_sort(vector_to_sort, n)){
             result fail;
             fail.overflow = false;
@@ -96,7 +103,7 @@ result time_radix_sortB2(int n, int power, function<void(int)> type_of_shuffle){
         auto start = high_resolution_clock::now();
         radixSortBit(vector_to_sort, n, power);
         auto end = high_resolution_clock::now();
-        duration<double, std::milli> res = end - start; 
+        duration<double> res = end - start; 
         if(!test_sort(vector_to_sort, n)){
             result fail;
             fail.overflow = false;
@@ -124,7 +131,7 @@ result time_radix_sortB10(int n, function<void(int)> type_of_shuffle){
         auto start = high_resolution_clock::now();
         radixSortB10(vector_to_sort, n, maxi);
         auto end = high_resolution_clock::now();
-        duration<double, std::milli> res = end - start; 
+        duration<double> res = end - start; 
         if(!test_sort(vector_to_sort, n)){
             result fail;
             fail.overflow = false;
@@ -151,7 +158,7 @@ result time_shell_sort(int n, function<void(int)> type_of_shuffle){
         auto start = high_resolution_clock::now();
         shellSort(vector_to_sort, n);
         auto end = high_resolution_clock::now();
-        duration<double, std::milli> res = end - start; 
+        duration<double> res = end - start; 
         if(!test_sort(vector_to_sort, n)){
             result fail;
             fail.overflow = false;
@@ -175,7 +182,7 @@ result time_count_sort(int n, function<void(int)> type_of_shuffle){
     double mini = DBL_MAX;
     type_of_shuffle(n);
     int maxi = getMax(vector_to_sort, n);
-    if(maxi >= 1000000){
+    if(maxi >= 1000000000){
         result r;
         r.overflow = true;
         r.time = 0;
@@ -186,7 +193,7 @@ result time_count_sort(int n, function<void(int)> type_of_shuffle){
         auto start = high_resolution_clock::now();
         countSort(vector_to_sort, n, maxi);
         auto end = high_resolution_clock::now();
-        duration<double, std::milli> res = end - start; 
+        duration<double> res = end - start; 
         if(!test_sort(vector_to_sort, n)){
             result fail;
             fail.overflow = false;
@@ -213,7 +220,7 @@ result time_quick_sort(int n, function<void(int)> type_of_shuffle){
         auto start = high_resolution_clock::now();
         quickSort(vector_to_sort, 1, n);
         auto end = high_resolution_clock::now();
-        duration<double, std::milli> res = end - start; 
+        duration<double> res = end - start; 
         if(!test_sort(vector_to_sort, n)){
             result fail;
             fail.overflow = false;
@@ -240,7 +247,7 @@ result time_native_sort(int n, function<void(int)> type_of_shuffle){
         auto start = high_resolution_clock::now();
         sort(vector_to_sort + 1, vector_to_sort + n + 1);
         auto end = high_resolution_clock::now();
-        duration<double, std::milli> res = end - start; 
+        duration<double> res = end - start; 
         if(!test_sort(vector_to_sort, n)){
             result fail;
             fail.overflow = false;
@@ -267,7 +274,7 @@ int main(){
     ofstream file1("results_perm.txt");
 
     file1 << "TESTE CU PERMUTARI DE N ELEMENTE" << "\n\n";
-    for(int n = 10; n <= 1000000; n *= 10){
+    for(int n = 10; n <= 100000000; n *= 10){
         file1 << "N = " << n << "\n\n";
         result r;
         r = time_merge_sort(n, shuffle_perm_n);
@@ -280,7 +287,7 @@ int main(){
         }
 
         r = time_quick_sort(n, shuffle_perm_n);
-        file1 << "Quick Sort: ";
+        file1 << "Quick Sort Median of Three: ";
         if(r.ok){
             file1 << r.time << "\n";
         }
@@ -308,6 +315,15 @@ int main(){
 
         r = time_radix_sortB2(n, 8, shuffle_perm_n);
         file1 << "Radix Sort Base = 2 ^ 8: ";
+        if(r.ok){
+            file1 << r.time << "\n";
+        }
+        else{
+            file1 << "Sortare esuata!" << "\n";
+        }
+
+        r = time_radix_sortB2(n, 4, shuffle_perm_n);
+        file1 << "Radix Sort Base = 2 ^ 4: ";
         if(r.ok){
             file1 << r.time << "\n";
         }
@@ -367,7 +383,7 @@ int main(){
     ofstream file2("results_rand.txt");
 
     file2 << "TESTE CU NUMERE MARI RANDOM" << "\n\n";
-    for(int n = 10; n <= 100000; n *= 10){
+    for(int n = 10; n <= 100000000; n *= 10){
         file2 << "N = " << n << "\n\n";
         result r;
         r = time_merge_sort(n, shuffle_vect);

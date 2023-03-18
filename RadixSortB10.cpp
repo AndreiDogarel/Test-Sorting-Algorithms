@@ -4,14 +4,15 @@ using namespace std;
 
 
 void countSortB10(int a[], int n, int exp){
-    map<int, int> mp;
+    int* res = new int[100000000];
+    int mp[15];
+    memset(mp, 0, sizeof(mp));
     for(int i = 1; i <= n; ++i){
         mp[(a[i] / exp) % 10]++;
     }
     for(int i = 1; i < 10; ++i){
         mp[i] += mp[i - 1];
     }
-    int* res = new int[100000000];
     for(int i = n; i >= 1; --i){
         res[mp[(a[i] / exp) % 10]] = a[i];
         mp[(a[i] / exp) % 10]--;
