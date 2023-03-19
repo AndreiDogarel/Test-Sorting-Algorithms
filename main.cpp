@@ -509,7 +509,7 @@ int main(){
     ofstream file3("results_perm.txt");
 
     file3 << "TESTE CU PERMUTARI DE N ELEMENTE APROAPE SORTATE" << "\n\n";
-    for(int n = 100000000; n <= 100000000; n *= 10){
+    for(int n = 10; n <= 100000000; n *= 10){
         file3 << "N = " << n << "\n\n";
         result r;
         r = time_merge_sort(n, almost_sorted_perm);
