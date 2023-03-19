@@ -22,6 +22,9 @@
        </li>
     </ul>
   </li>
+  <li>
+    Compararea timpilor de execuție al algoritmilor evidențiată prin tabele și grafice.
+  </li>
 </ol>
 
 <h2>Modul de testare al timpului de execuție:</h2>
