@@ -36,10 +36,27 @@ void shuffle_perm_n(int n){
     }
 }
 
+void almost_sorted_perm(int n){
+    for(int i = 1; i <= n; ++i){
+        vector_to_sort[i] = i;
+    }
+    mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+    uniform_int_distribution<int> rand_ind(1, n);
+    int limit = log2(n);
+    for(int k = 0; k < limit; ++k){
+        int i = rand_ind(rng);
+        int j = rand_ind(rng);
+        swap(vector_to_sort[i], vector_to_sort[j]);
+    }
+    for(int i = 1; i <= n; ++i){
+        principal[i] = vector_to_sort[i];
+    }
+}
+
 void shuffle_vect(int n){
     random_device rd;
     mt19937 rng_nr(rd());
-    uniform_int_distribution<> rand_nr(100000000, INT_MAX);
+    uniform_int_distribution<int> rand_nr(100000000, INT_MAX);
     for(int i = 1; i <= n; ++i){
         vector_to_sort[i] = rand_nr(rng_nr);
     }
@@ -287,7 +304,7 @@ int main(){
         }
 
         r = time_quick_sort(n, shuffle_perm_n);
-        file1 << "Quick Sort Median of Three: ";
+        file1 << "Quick Sort: ";
         if(r.ok){
             file1 << r.time << "\n";
         }
@@ -485,6 +502,114 @@ int main(){
     }
     ////////////////////////////////////////////////////
 
+
+    ///////////////////////////////////////////////////////////////////////
+    ////////// TESTE CU PERMUTARI DE N ELEMENTE APROAPE SORTATE //////////
+
+    ofstream file3("results_perm.txt");
+
+    file3 << "TESTE CU PERMUTARI DE N ELEMENTE APROAPE SORTATE" << "\n\n";
+    for(int n = 100000000; n <= 100000000; n *= 10){
+        file3 << "N = " << n << "\n\n";
+        result r;
+        r = time_merge_sort(n, almost_sorted_perm);
+        file3 << "Merge Sort: ";
+        if(r.ok){
+            file3 << r.time << "\n";
+        }
+        else{
+            file3 << "Sortare esuata!" << "\n";
+        }
+
+        r = time_quick_sort(n, almost_sorted_perm);
+        file3 << "Quick Sort: ";
+        if(r.ok){
+            file3 << r.time << "\n";
+        }
+        else{
+            file3 << "Sortare esuata!" << "\n";
+        }
+
+        r = time_radix_sortB2(n, 16, almost_sorted_perm);
+        file3 << "Radix Sort Base = 2 ^ 16: ";
+        if(r.ok){
+            file3 << r.time << "\n";
+        }
+        else{
+            file3 << "Sortare esuata!" << "\n";
+        }
+
+        r = time_radix_sortB2(n, 10, almost_sorted_perm);
+        file3 << "Radix Sort Base = 2 ^ 10: ";
+        if(r.ok){
+            file3 << r.time << "\n";
+        }
+        else{
+            file3 << "Sortare esuata!" << "\n";
+        }
+
+        r = time_radix_sortB2(n, 8, almost_sorted_perm);
+        file3 << "Radix Sort Base = 2 ^ 8: ";
+        if(r.ok){
+            file3 << r.time << "\n";
+        }
+        else{
+            file3 << "Sortare esuata!" << "\n";
+        }
+
+        r = time_radix_sortB2(n, 4, almost_sorted_perm);
+        file3 << "Radix Sort Base = 2 ^ 4: ";
+        if(r.ok){
+            file3 << r.time << "\n";
+        }
+        else{
+            file3 << "Sortare esuata!" << "\n";
+        }
+
+        r = time_radix_sortB10(n, almost_sorted_perm);
+        file3 << "Radix Sort Base = 10: ";
+        if(r.ok){
+            file3 << r.time << "\n";
+        }
+        else{
+            file3 << "Sortare esuata!" << "\n";
+        }
+
+        r = time_shell_sort(n, almost_sorted_perm);
+        file3 << "Shell Sort: ";
+        if(r.ok){
+            file3 << r.time << "\n";
+        }
+        else{
+            file3 << "Sortare esuata!" << "\n";
+        }
+
+        r = time_count_sort(n, almost_sorted_perm);
+        file3 << "Count Sort: ";
+        if(r.ok){
+            file3 << r.time << "\n";
+        }
+        else{
+            if(r.overflow){
+                file3 << "Nu poate sorta\n";
+            }
+            else{
+                file3 << "Sortare esuata!" << "\n";
+            }
+        }
+
+        r = time_native_sort(n, almost_sorted_perm);
+        file3 << "C++ Native Sort: ";
+        if(r.ok){
+            file3 << r.time << "\n";
+        }
+        else{
+            file3 << "Sortare esuata!" << "\n";
+        }
+
+        file3 << "\n\n";
+    }
+    ////////////////////////////////////////////////////
 
     if(principal != NULL){
         delete[] principal;
