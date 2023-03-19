@@ -13,7 +13,7 @@
        <li><a href = "https://github.com/AndreiDogarel/Test-Sorting-Algorithms/blob/main/ShellSort.cpp">ShellSort</a></li>
      </ul>
   </li>
-  <li>Testarea timpului de execuție pentru fiecare algoritm în parte cu diferite input-uri:
+  <li>Testarea timpului de execuție pentru fiecare algoritm în parte (+ algoritmul de sortare nativ din C++) cu diferite input-uri:
     <ul>
        <li>Permutări ale mulțimii {1, ... , N} - distribuție: uniformă</li>
        <li>Permutări ale mulțimii {1, ... , N} - distribuție: aproape sortate</li>
